@@ -2,10 +2,10 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Eventi Dicembre 2025 · Libra Terra Creativa</title>
+  <title>Libra · Eventi Dicembre 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* RESET MINIMALE */
+    /* RESET */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -13,37 +13,45 @@
     }
 
     :root {
-      --bg: #050816;
-      --fg: #fdfdfd;
-      --muted: rgba(245,245,245,0.7);
-      --accent: #ffd27f;
-      --accent-soft: rgba(255,210,127,0.14);
-      --border-soft: rgba(255,255,255,0.16);
-      --radius-lg: 20px;
-      --radius-full: 999px;
-      --blur: 22px;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
-      --shadow-soft: 0 22px 60px rgba(0,0,0,0.55);
-      --transition: 220ms ease-out;
+      /* Palette ispirata a Libra:
+         fondi scuri violacei/blu notte + accenti rame/terracotta + panna */
+      --bg-page: radial-gradient(circle at top, #2d2033 0%, #0d1018 55%, #05070a 100%);
+      --bg-card: rgba(18, 14, 22, 0.9);
+      --glass: rgba(255, 255, 255, 0.06);
+      --glass-strong: rgba(255, 255, 255, 0.12);
+      --border-soft: rgba(255, 255, 255, 0.18);
+      --border-strong: rgba(255, 255, 255, 0.38);
+      --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.75);
+
+      --accent-amber: #f4c27d;
+      --accent-terracotta: #d8705c;
+      --accent-sage: #afc8a5;
+      --text-main: #fdf8f2;
+      --text-muted: rgba(245, 235, 225, 0.8);
+
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --blur-strong: 26px;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+
+      --transition-fast: 160ms ease-out;
+      --transition-med: 260ms ease-out;
     }
 
     html, body {
       height: 100%;
+      background: #05070a;
+      color: var(--text-main);
       font-family: var(--font-main);
-      background: radial-gradient(circle at top, #202642 0%, #050816 45%, #000000 100%);
-      color: var(--fg);
       -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
     }
 
     body {
-      display: flex;
-      justify-content: center;
-      padding: 32px 16px 40px;
-    }
-
-    main {
-      width: 100%;
-      max-width: 1100px;
+      background-image: var(--bg-page);
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
     }
 
     a {
@@ -51,13 +59,64 @@
       text-decoration: none;
     }
 
-    /* HEADER / HERO COME SITO */
-    .site-header {
+    /* LAYOUT BASE */
+    .shell {
+      min-height: 100vh;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shell::before {
+      /* glow morbido di sfondo */
+      content: "";
+      position: fixed;
+      inset: -20% 10% auto auto;
+      max-width: 380px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 194, 125, 0.55), transparent 65%);
+      filter: blur(10px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shell::after {
+      content: "";
+      position: fixed;
+      inset: auto auto -18% -10%;
+      max-width: 420px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 114, 114, 0.4), transparent 70%);
+      filter: blur(14px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header.site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 24px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 60%),
+                  linear-gradient(135deg, rgba(10, 8, 14, 0.92), rgba(14, 12, 20, 0.96));
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      position: sticky;
+      top: 16px;
+      z-index: 20;
     }
 
     .brand {
@@ -66,299 +125,550 @@
       gap: 10px;
     }
 
-    .brand-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle, #ffd27f, #ff8a7f);
-      box-shadow: 0 0 18px rgba(255,210,127,0.75);
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background:
+        radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.7), transparent 55%),
+        radial-gradient(circle at 70% 80%, rgba(244, 194, 125, 0.9), rgba(216, 112, 92, 0.9));
+      box-shadow: 0 0 18px rgba(244, 194, 125, 0.9);
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
-      font-size: 0.85rem;
     }
 
     .brand-name {
-      letter-spacing: 0.16em;
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
     }
 
     .brand-tagline {
-      color: var(--muted);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    nav.site-nav {
+      display: flex;
+      gap: 14px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      position: relative;
+      overflow: hidden;
+      transition: color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(244, 194, 125, 0.15), rgba(216, 112, 92, 0.15));
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .nav-link span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+    }
+
+    .nav-link:hover::before {
+      opacity: 1;
+    }
+
+    .nav-cta {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 194, 125, 0.8);
+      background: linear-gradient(135deg, rgba(244, 194, 125, 0.25), rgba(216, 112, 92, 0.4));
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+      color: #130f0a;
       font-size: 0.78rem;
+      white-space: nowrap;
     }
 
-    .header-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-    }
-
-    .header-cta span {
-      font-size: 1rem;
-    }
-
-    .header-cta:hover {
-      background: rgba(0,0,0,0.7);
-      border-color: var(--accent);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.7);
-      transform: translateY(-1px);
-    }
-
-    /* HERO SECTION */
+    /* HERO */
     .hero {
-      border-radius: 26px;
-      padding: 24px 22px 22px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.88));
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
-      backdrop-filter: blur(26px) saturate(150%);
-      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      margin-top: 12px;
+      border-radius: var(--radius-lg);
+      padding: 26px 22px 26px;
+      border: 1px solid var(--border-soft);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 60%),
+        linear-gradient(135deg, rgba(15, 12, 20, 0.96), rgba(7, 10, 16, 0.98));
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(var(--blur-strong));
+      -webkit-backdrop-filter: blur(var(--blur-strong));
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(230px,2fr);
-      gap: 20px;
-      margin-bottom: 28px;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 24px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
-      inset: -80px;
+      inset: 12% -30% auto auto;
+      height: 120%;
       background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.14), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(255,210,127,0.24), transparent 55%);
-      opacity: 0.65;
+        linear-gradient(130deg, rgba(244, 194, 125, 0.18), transparent 70%),
+        radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.16), transparent 60%);
       mix-blend-mode: screen;
+      opacity: 0.9;
       pointer-events: none;
     }
 
-    .hero-main,
-    .hero-side {
+    .hero-copy {
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .hero-kicker {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 3px 11px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(0,0,0,0.55);
-      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(5, 6, 10, 0.65);
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      margin-bottom: 10px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
     }
 
     .hero-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 999px;
-      background: radial-gradient(circle,#ffd27f,#ff9f7f);
-      box-shadow: 0 0 12px rgba(255,210,127,0.9);
+      background: radial-gradient(circle, #fbe6c2, #f4c27d);
+      box-shadow: 0 0 14px rgba(244, 194, 125, 1);
     }
 
-    .hero h1 {
-      font-size: clamp(1.9rem, 3.2vw, 2.4rem);
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      max-width: 20ch;
     }
 
-    .hero p {
+    .hero-subtitle {
       font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 16px;
+      color: var(--text-muted);
+      max-width: 42ch;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .hero-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(9, 9, 13, 0.75);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 194, 125, 0.9);
+      background: linear-gradient(135deg, #f4c27d, #d8705c);
+      color: #111013;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.9);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 1);
+      filter: brightness(1.02);
+    }
+
+    .btn-ghost {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(7, 8, 12, 0.7);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.6);
+      color: var(--text-main);
+    }
+
+    .hero-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta strong {
+      color: var(--accent-amber);
+      font-weight: 600;
+    }
+
+    /* Hero side “card” */
+    .hero-side-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.16), transparent 55%),
+        linear-gradient(145deg, rgba(8, 8, 12, 0.9), rgba(8, 10, 15, 0.98));
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 14px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .hero-side-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-calendar-line {
+      margin-top: 2px;
+      font-size: 0.8rem;
+      color: var(--accent-sage);
     }
 
     .hero-badges {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.8rem;
+      gap: 6px;
+      margin-top: 4px;
     }
 
     .hero-badge {
-      padding: 5px 11px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(0,0,0,0.6);
-      color: var(--muted);
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 0.7rem;
+      color: var(--text-muted);
     }
 
-    .hero-side {
+    .hero-strip {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.18);
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-strip span strong {
+      color: var(--accent-amber);
+    }
+
+    /* SEZIONE GENERICA */
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    .section-header {
+      margin-bottom: 12px;
+      display: flex;
       justify-content: space-between;
       gap: 12px;
-      font-size: 0.8rem;
-    }
-
-    .hero-highlight {
-      padding: 10px 12px;
-      border-radius: var(--radius-lg);
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.2);
-      max-width: 260px;
-    }
-
-    .hero-highlight strong {
-      display: block;
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-    }
-
-    .hero-count {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    /* SEZIONE EVENTI (PAGINA SITO) */
-    .section-header {
-      display: flex;
       align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
     }
 
-    .section-header h2 {
+    .section-title {
       font-size: 1.1rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
-    .section-header span {
-      font-size: 0.82rem;
-      color: var(--muted);
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 40ch;
     }
 
-    .events-grid {
+    /* SEZIONE INTRO */
+    .intro {
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, rgba(11, 9, 15, 0.96), rgba(9, 9, 12, 0.98));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 18px;
+    }
+
+    .intro-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .intro-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: flex-start;
+      font-size: 0.78rem;
+    }
+
+    .intro-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(5, 6, 9, 0.9);
+      color: var(--text-muted);
+    }
+
+    /* SEZIONE EVENTI */
+    .events-section {
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 55%),
+        linear-gradient(145deg, rgba(9, 8, 12, 0.98), rgba(12, 11, 19, 0.98));
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .day-label {
-      margin-top: 8px;
-      margin-bottom: 4px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-    }
-
-    /* CARD EVENTO COME BLOCCO SITO */
-    .event-card {
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(0,0,0,0.9));
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(var(--blur)) saturate(150%);
-      -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
+    .events-layout {
       display: grid;
-      grid-template-columns: minmax(0,3.2fr) minmax(0,1.5fr);
-      gap: 12px 18px;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 3.1fr);
+      gap: 18px;
+    }
+
+    .events-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .events-sidebar-card {
+      border-radius: 18px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(7, 7, 11, 0.9);
+    }
+
+    .events-sidebar-card h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .event-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .event-legend-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--accent-amber), #d8705c);
+      box-shadow: 0 0 12px rgba(244, 194, 125, 1);
+    }
+
+    .events-days {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 540px;
+      overflow-y: auto;
+      padding-right: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+    }
+
+    .events-days::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .events-days::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+    }
+
+    .day-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .day-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 4px 2px;
+    }
+
+    .day-heading strong {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .day-heading span {
+      opacity: 0.85;
+    }
+
+    /* CARD EVENTO */
+    .event-card {
       position: relative;
+      border-radius: 18px;
+      padding: 12px 12px 12px 14px;
+      border: 1px solid var(--border-soft);
+      background:
+        radial-gradient(circle at top left, var(--glass-strong), transparent 55%),
+        linear-gradient(135deg, rgba(13, 11, 19, 0.98), rgba(8, 8, 12, 0.98));
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 2.7fr) minmax(0, 1.4fr);
+      gap: 10px 14px;
       overflow: hidden;
       transform-origin: center;
-      transition: transform var(--transition),
-                  box-shadow var(--transition),
-                  border-color var(--transition),
-                  background var(--transition);
-    }
-
-    .event-card::before {
-      content: "";
-      position: absolute;
-      inset: -80px;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.14), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(255,210,127,0.26), transparent 60%);
-      opacity: 0;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      transition: opacity var(--transition);
+      transition:
+        transform var(--transition-med),
+        box-shadow var(--transition-med),
+        border-color var(--transition-med),
+        background var(--transition-med);
     }
 
     .event-card:hover {
       transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 26px 80px rgba(0,0,0,0.8);
-      border-color: rgba(255,255,255,0.7);
-      background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(0,0,0,0.95));
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.9);
+      border-color: var(--border-strong);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 55%),
+        linear-gradient(145deg, rgba(18, 14, 24, 0.98), rgba(9, 9, 14, 0.98));
     }
 
-    .event-card:hover::before {
-      opacity: 1;
-    }
-
-    .event-main,
-    .event-side {
-      position: relative;
-      z-index: 1;
-    }
-
-    .event-kicker {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 4px;
+    .event-main {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 6px;
     }
 
-    .event-kicker-dot {
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .event-meta-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: radial-gradient(circle,#ffd27f,#ff9f7f);
-      box-shadow: 0 0 10px rgba(255,210,127,0.9);
+      background: radial-gradient(circle, var(--accent-amber), #d8705c);
+      box-shadow: 0 0 12px rgba(244, 194, 125, 1);
     }
 
     .event-title {
-      font-size: 1rem;
+      font-size: 0.98rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 3px;
     }
 
     .event-organizer {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
     .event-description {
-      font-size: 0.86rem;
-      line-height: 1.6;
-      color: rgba(250,250,250,0.92);
-      margin-bottom: 4px;
+      font-size: 0.83rem;
+      color: var(--text-main);
+      opacity: 0.9;
+      line-height: 1.5;
     }
 
     .event-notes {
-      font-size: 0.8rem;
-      color: var(--muted);
+      font-size: 0.78rem;
+      color: var(--text-muted);
     }
 
     .event-side {
@@ -366,434 +676,975 @@
       flex-direction: column;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 8px;
-      font-size: 0.82rem;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
 
-    .event-time {
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.28);
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+    .pill-time {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      background: rgba(3, 3, 8, 0.9);
       white-space: nowrap;
     }
 
-    .event-price {
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,210,127,0.8);
-      background: var(--accent-soft);
-      color: var(--accent);
+    .pill-price {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(244, 194, 125, 0.8);
+      background: rgba(244, 194, 125, 0.12);
+      color: var(--accent-amber);
       display: inline-flex;
       align-items: baseline;
       gap: 4px;
       white-space: nowrap;
     }
 
-    .event-price strong {
+    .pill-price strong {
       font-size: 0.9rem;
     }
 
-    .event-tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 6px;
-    }
-
-    .event-tag {
+    .pill-tag {
       padding: 3px 8px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(0,0,0,0.6);
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(4, 4, 8, 0.9);
       font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
+      letter-spacing: 0.14em;
     }
 
-    .event-tag--free {
-      border-color: rgba(135,255,175,0.9);
-      color: #a8ffcb;
+    .pill-tag--free {
+      border-color: rgba(175, 200, 165, 0.9);
+      color: var(--accent-sage);
     }
 
-    .event-tag--limited {
-      border-color: #ff8585;
-      color: #ffb3b3;
+    .pill-tag--alert {
+      border-color: rgba(239, 122, 122, 0.95);
+      color: #f9a3a3;
     }
 
-    .event-cta {
+    .btn-book {
       margin-top: 4px;
       padding: 5px 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(0,0,0,0.55);
-      font-size: 0.78rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(244, 194, 125, 0.85);
+      background: linear-gradient(135deg, rgba(244, 194, 125, 0.8), rgba(216, 112, 92, 0.9));
+      color: #161013;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.9);
       cursor: pointer;
-      transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
     }
 
-    .event-cta:hover {
-      background: rgba(0,0,0,0.9);
-      border-color: var(--accent);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
-      transform: translateY(-1px);
+    /* SEZIONE INFO PRENOTAZIONI */
+    .booking {
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, rgba(9, 8, 12, 0.98), rgba(7, 7, 10, 0.98));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: grid;
+      grid-template-columns: minmax(0, 2.4fr) minmax(0, 2fr);
+      gap: 18px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .booking-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .booking-chip {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(5, 5, 8, 0.9);
+      font-size: 0.8rem;
+    }
+
+    footer.site-footer {
+      margin-top: 6px;
+      padding: 10px 2px 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
     }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .hero {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
-      .hero-side {
-        align-items: flex-start;
+      .intro,
+      .events-layout,
+      .booking {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header.site-header {
+        flex-wrap: wrap;
+        border-radius: 18px;
+      }
+      nav.site-nav {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
       }
     }
 
-    @media (max-width: 780px) {
-      body {
-        padding: 20px 10px 28px;
-      }
-      .site-header {
-        flex-direction: column;
-        align-items: flex-start;
+    @media (max-width: 640px) {
+      .shell {
+        padding-inline: 14px;
       }
       .event-card {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
       .event-side {
         align-items: flex-start;
+      }
+      .events-days {
+        max-height: none;
       }
     }
   </style>
 </head>
 <body>
-  <main>
+  <div class="shell">
     <!-- HEADER SITO -->
     <header class="site-header">
-      <div class="brand">
-        <div class="brand-logo"></div>
+      <a href="#home" class="brand">
+        <div class="brand-mark"></div>
         <div class="brand-text">
-          <div class="brand-name">Libra Terra Creativa</div>
-          <div class="brand-tagline">Spazio di cultura, cibo vegetale e pratiche di benessere.</div>
+          <div class="brand-name">Libra</div>
+          <div class="brand-tagline">Terra Creativa · Pietrasanta</div>
         </div>
-      </div>
-      <button class="header-cta">
-        <span>✉️</span>
-        <span>Scrivi per info & prenotazioni</span>
-      </button>
+      </a>
+      <nav class="site-nav">
+        <a href="#home" class="nav-link"><span>Home</span></a>
+        <a href="#eventi" class="nav-link"><span>Eventi</span></a>
+        <a href="#prenotazioni" class="nav-link"><span>Prenota</span></a>
+        <a href="#contatti" class="nav-link nav-cta"><span>Scrivici</span></a>
+      </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-main">
+    <!-- HERO / HOME -->
+    <section id="home" class="hero">
+      <div class="hero-copy">
         <div class="hero-kicker">
           <span class="hero-dot"></span>
-          <span>Eventi</span>
+          <span>Dicembre 2025 · Programma</span>
         </div>
-        <h1>Dicembre 2025 a Libra</h1>
-        <p>
-          Brunch, workshop, pratiche di respiro e voce, cene d’inverno e percorsi esperienziali.
-          Scegli il tuo modo di attraversare l’ultimo mese dell’anno.
+        <h1 class="hero-title">Un inverno di riti, tavole e suoni</h1>
+        <p class="hero-subtitle">
+          Brunch vegetali, cerchi sonori, workshop di arte e cene d’inverno.  
+          Scegli l’esperienza che ti chiama e vieni a viverla a Libra.
         </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Brunch by Amasia</span>
+          <span class="hero-tag">Workshop &amp; laboratori</span>
+          <span class="hero-tag">Rituali sciamanici</span>
+          <span class="hero-tag">Arte, respiro, numerologia</span>
+        </div>
+
+        <div class="hero-cta-row">
+          <a href="#eventi" class="btn-primary">Scopri tutti gli eventi</a>
+          <a href="#prenotazioni" class="btn-ghost">Come prenotare</a>
+        </div>
+
+        <p class="hero-meta">
+          Più di <strong>20 momenti</strong> tra brunch, pratiche e incontri, dal 6 al 28 dicembre.
+        </p>
+      </div>
+
+      <aside class="hero-side-card" aria-label="Eventi in evidenza">
+        <div class="hero-side-header">
+          <p class="hero-tagline">In evidenza questo mese</p>
+          <p class="hero-calendar-line">6 · 7 · 13 · 28 dicembre</p>
+        </div>
+
         <div class="hero-badges">
-          <div class="hero-badge">🌙 Panettone vegetale &amp; brunch</div>
-          <div class="hero-badge">🎨 Arte, ceramica, arteterapia</div>
-          <div class="hero-badge">💨 Respiro, voce, sciamanesimo</div>
+          <div class="hero-badge">Wim Hof Method · Workshop</div>
+          <div class="hero-badge">Lasagne · Serata Musicale</div>
+          <div class="hero-badge">Corsi: ceramica &amp; panificazione</div>
+          <div class="hero-badge">Canto dell’Anima · Cerchio</div>
         </div>
+
+        <div class="hero-strip">
+          <span><strong>Libra</strong> · Terra Creativa</span>
+          <span>Pietrasanta · via del Lavoro (LU)</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- INTRO SPAZIO -->
+    <section id="about" class="intro">
+      <div>
+        <div class="section-header">
+          <h2 class="section-title">Lo spazio</h2>
+        </div>
+        <p class="intro-text">
+          Libra è una casa per esperienze condivise: si mangia, si ascolta, si crea.  
+          Un luogo dove brunch vegetali, pratiche corporee, arte, musica e parola si intrecciano per dare forma a nuovi rituali quotidiani.
+        </p>
       </div>
-      <div class="hero-side">
-        <div class="hero-highlight">
-          <strong>Sabato 6 &amp; 13 · Domenica 14</strong>
-          <p class="hero-count">
-            I weekend più intensi del mese tra pratiche, workshop e cene speciali. Prenota il tuo posto per tempo.
-          </p>
-        </div>
-        <div class="hero-count">
-          18 eventi · 1 mese di esplorazione.
-        </div>
+      <div class="intro-meta">
+        <div class="intro-pill">Cucina vegetale by Amasia</div>
+        <div class="intro-pill">Laboratori per adulti e bimbi</div>
+        <div class="intro-pill">Cerchi sonori, numerologia, respiro</div>
+        <div class="intro-pill">Spazio eventi nel cuore di Pietrasanta</div>
       </div>
     </section>
 
-    <!-- SEZIONE EVENTI: COME PAGINA SITO -->
-    <section id="eventi-dicembre" aria-label="Eventi Dicembre 2025">
+    <!-- EVENTI DICEMBRE -->
+    <section id="eventi" class="events-section">
       <div class="section-header">
-        <h2>Eventi di Dicembre</h2>
-        <span>Scorri la pagina e trova il tuo appuntamento.</span>
+        <h2 class="section-title">Eventi di dicembre</h2>
+        <p class="section-subtitle">
+          Tutti gli appuntamenti del mese, dal primo sabato fino all’ultima domenica di dicembre.  
+          Scorri i giorni, apri le card e quando hai deciso passa alla sezione “Prenota”.
+        </p>
       </div>
 
-      <div class="events-grid">
+      <div class="events-layout">
+        <!-- Sidebar info -->
+        <aside class="events-sidebar">
+          <div class="events-sidebar-card">
+            <h3>Come leggere il programma</h3>
+            <p>
+              Ogni card contiene titolo, chi conduce, orari, quota e note pratiche.  
+              Il pulsante “Prenota su WhatsApp” ti porta direttamente al contatto di Libra.
+            </p>
+            <div class="event-legend">
+              <div class="event-legend-chip">
+                <span class="legend-dot"></span>
+                <span>laboratori &amp; workshop</span>
+              </div>
+              <div class="event-legend-chip">
+                <span class="legend-dot" style="background: radial-gradient(circle,#afc8a5,#6c9c6a); box-shadow:0 0 12px #afc8a5;"></span>
+                <span>brunch &amp; cene</span>
+              </div>
+              <div class="event-legend-chip">
+                <span class="legend-dot" style="background: radial-gradient(circle,#f9a3a3,#ef7a7a); box-shadow:0 0 12px #f9a3a3;"></span>
+                <span>pratiche intensive</span>
+              </div>
+            </div>
+          </div>
+          <div class="events-sidebar-card">
+            <h3>Consigli</h3>
+            <p>
+              Alcuni eventi hanno posti limitati (Wim Hof, brunch, cene e corsi manuali):  
+              ti consigliamo di prenotare con qualche giorno di anticipo.
+            </p>
+          </div>
+        </aside>
 
-        <!-- SABATO 6 -->
-        <div class="day-label">Sabato 6 Dicembre</div>
+        <!-- Lista eventi -->
+        <div class="events-days">
 
-        <!-- Disegno dal Vero & Colazione con Modella -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Disegno · Colazione</span>
+          <!-- 6 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Sabato 6 dicembre</strong>
+              <span>Arte, degustazioni, numerologia</span>
             </div>
-            <h3 class="event-title">Disegno dal Vero &amp; Colazione con Modella</h3>
-            <p class="event-organizer">con Maria Fontana</p>
-            <p class="event-description">
-              Un'esperienza che unisce il disegno dal vero a una colazione conviviale: porta i tuoi materiali e pratica in un ambiente rilassante, nutrendo creatività e relazioni.
-            </p>
-            <p class="event-notes">
-              Note: portare i propri materiali da disegno.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">10:30 – 13:00</div>
-            <div class="event-price">
-              <span>Quota</span><strong>10 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Laboratorio</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
 
-        <!-- Centro Tavola Natalizio -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Arte floreale · Tavola delle feste</span>
-            </div>
-            <h3 class="event-title">Centro Tavola Natalizio</h3>
-            <p class="event-organizer">Galleria Bellina</p>
-            <p class="event-description">
-              Workshop di arte floreale per creare il tuo centro tavola di Natale con portatovaglioli e segnaposti coordinati, tra cerimonia del tè e degustazione del panettone vegetale by Amasia.
-            </p>
-            <p class="event-notes">
-              Note: tutti i materiali sono inclusi.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">Dalle 15:30</div>
-            <div class="event-price">
-              <span>Quota</span><strong>45 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Workshop</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
+            <!-- Disegno dal Vero & Colazione con Modella -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Disegno · Colazione conviviale</span>
+                </div>
+                <h3 class="event-title">Disegno dal Vero &amp; Colazione con Modella</h3>
+                <p class="event-organizer">con Maria Fontana</p>
+                <p class="event-description">
+                  Un'esperienza che unisce pratica di disegno dal vero e colazione facilitativa insieme agli altri partecipanti, in un ambiente rilassante e creativo.
+                </p>
+                <p class="event-notes">Porta i tuoi materiali da disegno.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">10:30 – 13:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>10 €</strong>
+                </div>
+                <div class="pill-tag">Laboratorio</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Disegno%20dal%20Vero%20%26%20Colazione%20con%20Modella%20del%206%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
 
-        <!-- IN CON-TATTO -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Genitori · Bimbi 9–36 mesi</span>
-            </div>
-            <h3 class="event-title">IN CON-TATTO</h3>
-            <p class="event-organizer">con Ilaria Marracci</p>
-            <p class="event-description">
-              Spazio di creatività tattile e sensoriale per piccole e grandi mani, tra colori naturali, argilla e materiali da esplorare con tutti i sensi, in un ambiente sicuro e stimolante.
-            </p>
-            <p class="event-notes">
-              Note: tre turni per fasce d'età (9–12 mesi, 13–24 mesi, 24–36 mesi).
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">
-              10:00–10:45 · 11:00–11:45 · 12:00–12:45
-            </div>
-            <div class="event-price">
-              <span>Quota</span><strong>10 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Percorso bimbi</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
+            <!-- Centro Tavola Natalizio -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Arte floreale · Tavola delle feste</span>
+                </div>
+                <h3 class="event-title">Centro Tavola Natalizio</h3>
+                <p class="event-organizer">Galleria Bellina</p>
+                <p class="event-description">
+                  Workshop per realizzare il tuo centro tavola di Natale con portatovaglioli e segnaposti coordinati, tra cerimonia del tè e degustazione del panettone vegetale by Amasia.
+                </p>
+                <p class="event-notes">Tutti i materiali inclusi.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">Dalle 15:30</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>45 €</strong>
+                </div>
+                <div class="pill-tag">Workshop</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Centro%20Tavola%20Natalizio%20del%206%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
 
-        <!-- Degustazione Pan di Luna (6) -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Degustazione · Panettone vegetale</span>
-            </div>
-            <h3 class="event-title">Degustazione Pan di Luna</h3>
-            <p class="event-organizer">by Pan di Luna</p>
-            <p class="event-description">
-              Degustazione del Panettone 100% vegetale PanDiLuna accompagnato da cioccolata calda, per assaporare un Natale plant-based dove tradizione e innovazione si incontrano in ogni morso.
-            </p>
-            <p class="event-notes">
-              Note: panettone vegetale + cioccolata calda.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">15:30 – 17:30</div>
-            <div class="event-price">
-              <span>Quota</span><strong>15 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Degustazione</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
+            <!-- IN CON-TATTO -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Spazio bimbi · 9–36 mesi</span>
+                </div>
+                <h3 class="event-title">IN CON‑TATTO</h3>
+                <p class="event-organizer">con Ilaria Marracci</p>
+                <p class="event-description">
+                  Spazio di creatività ed esplorazione tattile e sensoriale in cui piccole e grandi mani lavorano insieme con colori naturali, argilla e materiali da esplorare con tutti i sensi.
+                </p>
+                <p class="event-notes">
+                  Tre turni per fasce d'età: 9–12 mesi · 13–24 mesi · 24–36 mesi.
+                </p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">10:00–10:45 · 11:00–11:45 · 12:00–12:45</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>10 €</strong>
+                </div>
+                <div class="pill-tag">Percorso bimbi</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20informazioni%20su%20IN%20CON-TATTO%20del%206%20dicembre%20per%20il%20mio%20bambino.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
 
-        <!-- Numerologia per l'Anima -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Numerologia · Crescita personale</span>
-            </div>
-            <h3 class="event-title">Numerologia per l'Anima</h3>
-            <p class="event-organizer">con Tania Giannecchini</p>
-            <p class="event-description">
-              I codici numerici della data di nascita diventano bussola per comprendere chi sei davvero, riconnetterti alla tua parte più autentica e leggere talenti, sfide e direzione del tuo percorso di vita.
-            </p>
-            <p class="event-notes">
-              Note: conferenza esperienziale.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">16:00 – 18:00</div>
-            <div class="event-price">
-              <span>Quota</span><strong>25 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Incontro esperienziale</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
+            <!-- Degustazione Pan di Luna -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Degustazione · Panettone vegetale</span>
+                </div>
+                <h3 class="event-title">Degustazione Pan di Luna</h3>
+                <p class="event-organizer">Pan di Luna</p>
+                <p class="event-description">
+                  Degustazione del Panettone 100% vegetale PanDiLuna accompagnato da cioccolata calda: un Natale plant‑based, caldo e avvolgente.
+                </p>
+                <p class="event-notes">Panettone vegetale + cioccolata calda.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">15:30 – 17:30</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>15 €</strong>
+                </div>
+                <div class="pill-tag">Degustazione</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Degustazione%20Pan%20di%20Luna%20del%206%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
 
-        <!-- DOMENICA 7 -->
-        <div class="day-label">Domenica 7 Dicembre</div>
+            <!-- Numerologia per l'Anima -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Numerologia · Crescita personale</span>
+                </div>
+                <h3 class="event-title">Numerologia per l'Anima</h3>
+                <p class="event-organizer">con Tania Giannecchini</p>
+                <p class="event-description">
+                  Un viaggio nei codici numerici della data di nascita per comprendere chi sei, riscoprire talenti nascosti e leggere le sfide del tuo percorso di vita.
+                </p>
+                <p class="event-notes">Conferenza esperienziale.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">16:00 – 18:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>25 €</strong>
+                </div>
+                <div class="pill-tag">Incontro esperienziale</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Numerologia%20per%20l'Anima%20del%206%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
 
-        <!-- Yoga Flow con Cucina a Vista -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Yoga · Brunch</span>
+          <!-- 7 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Domenica 7 dicembre</strong>
+              <span>Yoga &amp; brunch</span>
             </div>
-            <h3 class="event-title">Yoga Flow con Cucina a Vista</h3>
-            <p class="event-organizer">con Naty Shteiner &amp; Amasia</p>
-            <p class="event-description">
-              Una lezione di Yoga Flow immersa nel silenzio dell’inverno mentre in cucina si prepara il brunch: due forme di presenza e meditazione che si intrecciano in un’esperienza multisensoriale.
-            </p>
-            <p class="event-notes">
-              Note: include pratica yoga · brunch by Amasia facoltativo.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">10:30 – 11:30 + brunch</div>
-            <div class="event-price">
-              <span>Quota</span><strong>20 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Yoga &amp; Food</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
 
-        <!-- Brunch by Amasia (7) -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Brunch vegetale</span>
-            </div>
-            <h3 class="event-title">Brunch by Amasia</h3>
-            <p class="event-organizer">by Amasia</p>
-            <p class="event-description">
-              Brunch vegetale gourmet con buffet di dolci, avocado toast, tofu scramble, açai bowl, spremuta fresca e cappuccino, in un’atmosfera rilassata che nutre corpo e anima.
-            </p>
-            <p class="event-notes">
-              Note: su prenotazione.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">11:00 – 15:00</div>
-            <div class="event-price">
-              <span>Quota</span><strong>35 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag event-tag--limited">Brunch</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
+            <!-- Yoga Flow con Cucina a Vista -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Yoga · Brunch in preparazione</span>
+                </div>
+                <h3 class="event-title">Yoga Flow con Cucina a Vista</h3>
+                <p class="event-organizer">con Naty Shteiner &amp; Amasia</p>
+                <p class="event-description">
+                  Una lezione di Yoga Flow mentre in cucina prende forma il brunch: due forme di presenza e meditazione che si incontrano in un’unica esperienza multisensoriale.
+                </p>
+                <p class="event-notes">Include pratica yoga · brunch facoltativo by Amasia.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">10:30 – 11:30 + brunch</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>20 €</strong>
+                </div>
+                <div class="pill-tag">Yoga &amp; food</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Yoga%20Flow%20con%20Cucina%20a%20Vista%20del%207%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
 
-        <!-- LUNEDÌ 8 -->
-        <div class="day-label">Lunedì 8 Dicembre</div>
-
-        <!-- Radici d'Inverno -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Cena · Cucina vegetale</span>
-            </div>
-            <h3 class="event-title">Radici d'Inverno</h3>
-            <p class="event-organizer">Cena by Amasia</p>
-            <p class="event-description">
-              Cena dedicata ai sapori profondi e caldi dell’inverno: radici, verdure di stagione e piatti che scaldano il cuore, tra tradizione e cucina vegetale gourmet.
-            </p>
-            <p class="event-notes">
-              Note: su prenotazione.
-            </p>
+            <!-- Brunch by Amasia -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Brunch vegetale</span>
+                </div>
+                <h3 class="event-title">Brunch by Amasia</h3>
+                <p class="event-organizer">Amasia</p>
+                <p class="event-description">
+                  Buffet di dolci, avocado toast, tofu scramble, açai bowl, spremuta fresca e cappuccino in un’atmosfera rilassata e conviviale.
+                </p>
+                <p class="event-notes">Su prenotazione.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">11:00 – 15:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>35 €</strong>
+                </div>
+                <div class="pill-tag pill-tag--alert">Brunch</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20il%20Brunch%20by%20Amasia%20del%207%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
           </div>
-          <div class="event-side">
-            <div class="event-time">Dalle 20:00</div>
-            <div class="event-price">
-              <span>Quota</span><strong>55 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Cena evento</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
 
-        <!-- Corso di Ceramica - Edizione di Natale -->
-        <article class="event-card">
-          <div class="event-main">
-            <div class="event-kicker">
-              <span class="event-kicker-dot"></span>
-              <span>Ceramica · Natale</span>
+          <!-- 8 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Lunedì 8 dicembre</strong>
+              <span>Cena d’inverno &amp; ceramica</span>
             </div>
-            <h3 class="event-title">Corso di Ceramica · Edizione di Natale</h3>
-            <p class="event-organizer">con Linda Bianchi Cervini</p>
-            <p class="event-description">
-              Edizione speciale natalizia del corso di ceramica per creare piccoli oggetti e decorazioni a tema, da regalare o tenere con te, guidato dalle mani esperte di Linda.
-            </p>
-            <p class="event-notes">
-              Note: tutti i materiali sono inclusi.
-            </p>
-          </div>
-          <div class="event-side">
-            <div class="event-time">15:00 – 18:00</div>
-            <div class="event-price">
-              <span>Quota</span><strong>40 €</strong>
-            </div>
-            <div class="event-tag-row">
-              <span class="event-tag">Laboratorio</span>
-            </div>
-            <button class="event-cta">Prenota il posto</button>
-          </div>
-        </article>
 
-        <!-- ...qui puoi continuare gli altri giorni (10, 12, 13, 14, 15, 20, 21, 28) 
-             ripetendo lo stesso pattern di card che ho già impostato sopra... -->
+            <!-- Radici d'Inverno -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Cena · Cucina vegetale</span>
+                </div>
+                <h3 class="event-title">Radici d'Inverno</h3>
+                <p class="event-organizer">Cena by Amasia</p>
+                <p class="event-description">
+                  Una cena dedicata ai sapori profondi e caldi dell’inverno: radici, verdure di stagione e piatti che scaldano il cuore in chiave vegetale gourmet.
+                </p>
+                <p class="event-notes">Su prenotazione.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">Dalle 20:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>55 €</strong>
+                </div>
+                <div class="pill-tag">Cena evento</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20la%20cena%20Radici%20d'Inverno%20del%208%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
 
+            <!-- Corso di Ceramica - Natale -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Ceramica · Natale</span>
+                </div>
+                <h3 class="event-title">Corso di Ceramica · Edizione di Natale</h3>
+                <p class="event-organizer">con Linda Bianchi Cervini</p>
+                <p class="event-description">
+                  Edizione speciale natalizia per creare piccoli oggetti e decorazioni in ceramica, da regalare o tenere con te, guidata dall’esperienza di Linda.
+                </p>
+                <p class="event-notes">Tutti i materiali inclusi.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">15:00 – 18:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>40 €</strong>
+                </div>
+                <div class="pill-tag">Laboratorio</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20il%20Corso%20di%20Ceramica%20Natale%20del%208%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 10 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Mercoledì 10 dicembre</strong>
+              <span>Sciamanesimo contemporaneo</span>
+            </div>
+
+            <!-- Sciamanesimo Contemporaneo -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Percorso sciamanico</span>
+                </div>
+                <h3 class="event-title">Sciamanesimo Contemporaneo · Incontro 2 di 3</h3>
+                <p class="event-organizer">con Beatrice Reglieri</p>
+                <p class="event-description">
+                  Viaggio sciamanico per incontrare il tuo animale guida e riconnetterti alla Madre Terra attraverso rituali di restituzione dei doni.
+                </p>
+                <p class="event-notes">Porta tappetino e coperta · secondo incontro del percorso.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">18:30 – 20:30</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>35 €</strong>
+                </div>
+                <div class="pill-tag">Percorso</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Sciamanesimo%20Contemporaneo%20del%2010%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 12 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Venerdì 12 dicembre</strong>
+              <span>Presentazione libro</span>
+            </div>
+
+            <!-- Presentazione Libro -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Libro · Danza con la vita</span>
+                </div>
+                <h3 class="event-title">Il miracolo sei tu: Danza con la vita</h3>
+                <p class="event-organizer">con Lia Miro</p>
+                <p class="event-description">
+                  Presentazione del libro di Lia Miro per esplorare come danza e movimento possano diventare strumenti di trasformazione personale e riconnessione con la propria essenza.
+                </p>
+                <p class="event-notes">Ingresso libero.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">17:00 – 18:00</div>
+                <div class="pill-tag pill-tag--free">Ingresso gratuito</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- 13 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Sabato 13 dicembre</strong>
+              <span>Respiro, suono, lasagne &amp; musica</span>
+            </div>
+
+            <!-- Dal Respiro all'Ascolto di Sé -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Meditazione · Movimento</span>
+                </div>
+                <h3 class="event-title">Dal Respiro all'Ascolto di Sé</h3>
+                <p class="event-organizer">con Daniele Boldrini</p>
+                <p class="event-description">
+                  Mattinata di consapevolezza attraverso meditazione e movimenti dell’ascolto interno, per connetterti ai messaggi del corpo.
+                </p>
+                <p class="event-notes">Porta tappetino, cuscino e abbigliamento comodo.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">09:00 – 13:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>110 €</strong>
+                </div>
+                <div class="pill-tag pill-tag--alert">Seminario</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Dal%20Respiro%20all'Ascolto%20di%20S%C3%A9%20del%2013%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+
+            <!-- Canto dell'Anima -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Suono · Cerchio</span>
+                </div>
+                <h3 class="event-title">Canto dell'Anima</h3>
+                <p class="event-organizer">con Andrea Parigi</p>
+                <p class="event-description">
+                  Cerchio sonoro evocativo e sciamanico che armonizza le frequenze interiori, con un canto di protezione e benedizione personalizzato per ogni partecipante.
+                </p>
+                <p class="event-notes">Esperienza di gruppo in cerchio.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">15:00 – 17:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>45 €</strong>
+                </div>
+                <div class="pill-tag">Cerchio sonoro</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Canto%20dell'Anima%20del%2013%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+
+            <!-- Lasagne - Serata Musicale -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Cena · Musica dal vivo</span>
+                </div>
+                <h3 class="event-title">Lasagne · Serata Musicale</h3>
+                <p class="event-organizer">Libra</p>
+                <p class="event-description">
+                  Tre portate di lasagne in tre diverse versioni vegetali, accompagnate da musica dal vivo per una serata conviviale e caldissima.
+                </p>
+                <p class="event-notes">Su prenotazione.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">Dalle 20:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>45 €</strong>
+                </div>
+                <div class="pill-tag">Cena &amp; musica</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Lasagne%20-%20Serata%20Musicale%20del%2013%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 14 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Domenica 14 dicembre</strong>
+              <span>Metodo Wim Hof</span>
+            </div>
+
+            <!-- Wim Hof Method -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Respiro · Freddo · Mente</span>
+                </div>
+                <h3 class="event-title">Wim Hof Method · Fundamentals Workshop</h3>
+                <p class="event-organizer">con Andrea Bianchi · Istruttore WHM certificato</p>
+                <p class="event-description">
+                  Workshop intensivo sui tre pilastri del Metodo Wim Hof: respirazione, esposizione al freddo e forza mentale, con teoria, pratica, bagno ghiacciato facoltativo e brunch vegano.
+                </p>
+                <p class="event-notes">
+                  Max 30 partecipanti · porta tappetino, coperta, costume, ciabatte e asciugamano.
+                </p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">09:00 – 15:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>99 €</strong>
+                </div>
+                <div class="pill-tag pill-tag--alert">Workshop intensivo</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Wim%20Hof%20Method%20del%2014%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 15 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Lunedì 15 dicembre</strong>
+              <span>Buona alimentazione</span>
+            </div>
+
+            <!-- Incontri di Buona Alimentazione -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Percorso nutrizione</span>
+                </div>
+                <h3 class="event-title">Incontri di Buona Alimentazione · 3° incontro</h3>
+                <p class="event-organizer">con Dott.ssa Francesca Ciuffi · Nutrizionista</p>
+                <p class="event-description">
+                  Terzo incontro dedicato al microbiota intestinale come mattone essenziale del benessere, tra scienza e pratiche quotidiane.
+                </p>
+                <p class="event-notes">Terzo di 8 incontri mensili (ogni terzo lunedì).</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">18:00 – 20:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>25 €</strong>
+                </div>
+                <div class="pill-tag">Percorso</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Incontri%20di%20Buona%20Alimentazione%203%C2%B0%20incontro%20del%2015%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 20 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Sabato 20 dicembre</strong>
+              <span>Disegno dal vero</span>
+            </div>
+
+            <!-- Disegno dal Vero con Modella -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Disegno dal vero</span>
+                </div>
+                <h3 class="event-title">Disegno dal Vero con Modella</h3>
+                <p class="event-organizer">con Maria Fontana</p>
+                <p class="event-description">
+                  Pomeriggio di pratica di disegno dal vero con modella dal vivo, per esercitare lo sguardo e la tecnica in un’atmosfera creativa.
+                </p>
+                <p class="event-notes">Porta i tuoi materiali da disegno.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">16:00 – 18:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>10 €</strong>
+                </div>
+                <div class="pill-tag">Laboratorio</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Disegno%20dal%20Vero%20con%20Modella%20del%2020%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 21 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Domenica 21 dicembre</strong>
+              <span>Brunch &amp; voce</span>
+            </div>
+
+            <!-- Brunch by Amasia -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Brunch vegetale</span>
+                </div>
+                <h3 class="event-title">Brunch by Amasia</h3>
+                <p class="event-organizer">Amasia</p>
+                <p class="event-description">
+                  Buffet di dolci, avocado toast, tofu scramble, açai bowl, spremuta e cappuccino per una domenica che sa di cura e leggerezza.
+                </p>
+                <p class="event-notes">Su prenotazione.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">11:00 – 15:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>35 €</strong>
+                </div>
+                <div class="pill-tag pill-tag--alert">Brunch</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20il%20Brunch%20by%20Amasia%20del%2021%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+
+            <!-- Incontro di Psicofonia -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Voce · Psicofonia</span>
+                </div>
+                <h3 class="event-title">Incontro di Psicofonia</h3>
+                <p class="event-organizer">conduttore da definire</p>
+                <p class="event-description">
+                  Esplorazione della voce come chiave di lettura e riequilibrio interiore, tra canto, vibrazione e risonanza per ritrovare armonia psicofisica.
+                </p>
+                <p class="event-notes">Esperienza di voce e canto consapevole.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">17:30 – 19:30</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>30 €</strong>
+                </div>
+                <div class="pill-tag">Esperienza sonora</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Incontro%20di%20Psicofonia%20del%2021%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- 28 DICEMBRE -->
+          <div class="day-block">
+            <div class="day-heading">
+              <strong>Domenica 28 dicembre</strong>
+              <span>Arteterapia, panettone &amp; pani</span>
+            </div>
+
+            <!-- Laboratorio di Arteterapia -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Arteterapia</span>
+                </div>
+                <h3 class="event-title">Laboratorio di Arteterapia</h3>
+                <p class="event-organizer">con Ilaria Marracci</p>
+                <p class="event-description">
+                  Spazio per fermarsi, respirare e decomprimere attraverso il fare creativo. Non servono competenze artistiche, solo voglia di sperimentare. Il bar di Libra è aperto per la colazione.
+                </p>
+                <p class="event-notes">Nessuna competenza artistica richiesta.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">10:30 – 11:30</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>15 €</strong>
+                </div>
+                <div class="pill-tag">Laboratorio</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20il%20Laboratorio%20di%20Arteterapia%20del%2028%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+
+            <!-- Degustazione Pan di Luna -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Degustazione · Panettone</span>
+                </div>
+                <h3 class="event-title">Degustazione Pan di Luna</h3>
+                <p class="event-organizer">Pan di Luna</p>
+                <p class="event-description">
+                  Ultima occasione del mese per degustare il Panettone 100% vegetale PanDiLuna con cioccolata calda, per un Natale plant‑based che scalda il cuore.
+                </p>
+                <p class="event-notes">Panettone vegetale + cioccolata calda.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">15:30 – 17:30</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>15 €</strong>
+                </div>
+                <div class="pill-tag">Degustazione</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20Degustazione%20Pan%20di%20Luna%20del%2028%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+
+            <!-- Corso di Panificazione -->
+            <article class="event-card">
+              <div class="event-main">
+                <div class="event-meta">
+                  <span class="event-meta-dot"></span>
+                  <span>Panificazione artigianale</span>
+                </div>
+                <h3 class="event-title">Corso di Panificazione</h3>
+                <p class="event-organizer">con Andrea Rossi</p>
+                <p class="event-description">
+                  Corso pratico per imparare l’arte della panificazione: lievitazioni, impasti e pane fragrante da portare a casa insieme alle competenze per continuare a sperimentare.
+                </p>
+                <p class="event-notes">Corso pratico · materiali inclusi.</p>
+              </div>
+              <div class="event-side">
+                <div class="pill-time">16:00 – 19:00</div>
+                <div class="pill-price">
+                  <span>Quota</span><strong>50 €</strong>
+                </div>
+                <div class="pill-tag">Workshop</div>
+                <a class="btn-book" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20prenotare%20il%20Corso%20di%20Panificazione%20del%2028%20dicembre.">
+                  Prenota su WhatsApp
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
-  </main>
+
+    <!-- PRENOTAZIONI -->
+    <section id="prenotazioni" class="booking">
+      <div>
+        <div class="section-header">
+          <h2 class="section-title">Prenotazioni</h2>
+        </div>
+        <p>
+          Per partecipare agli eventi di dicembre scrivici su WhatsApp o via mail indicando:  
+          titolo dell’evento, data, numero di persone e un recapito telefonico.
+        </p>
+        <p style="margin-top:6px;">
+          Per brunch, cene, workshop manuali e il Metodo Wim Hof la prenotazione è obbligatoria.  
+          Per gli incontri a ingresso libero è comunque gradita conferma di presenza.
+        </p>
+      </div>
+      <div class="booking-actions">
+        <a class="btn-primary" href="https://wa.me/3491408666?text=Ciao%20Libra,%20vorrei%20informazioni%20e%20prenotare%20per%20gli%20eventi%20di%20dicembre.">
+          Apri WhatsApp
+        </a>
+        <a class="btn-ghost" href="mailto:info@libra-terra-creativa.it?subject=Prenotazione%20eventi%20dicembre">
+          Scrivi una mail
+        </a>
+        <div class="booking-chip">WhatsApp · +39 349 140 8666</div>
+        <div class="booking-chip">Pagamento in loco salvo diverse indicazioni</div>
+      </div>
+    </section>
+
+    <!-- CONTATTI / FOOTER -->
+    <section id="contatti"></section>
+    <footer class="site-footer">
+      <span>Libra · Terra Creativa · Pietrasanta (LU)</span>
+      <span>Seguici su Instagram · @libraterracreativa</span>
+    </footer>
+  </div>
 </body>
 </html>
